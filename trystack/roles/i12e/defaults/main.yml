@@ -1,0 +1,35 @@
+---
+private_key_file: "{{ role_path }}/files/ansible_id"
+pub_key_file:     "{{ role_path }}/files/ansible_id.pub"
+
+openstack:
+  - cloud: trystack1
+    keypair:
+      - name: wangkexiong
+        public_key_file: "{{ pub_key_file }}"
+    security:
+      - name: opsecurity
+        rules:
+          - { name: ssh, protocol: tcp, port_min: 22, port_max: 22 }
+          - { name: ftp, protocol: tcp, port_min: 21, port_max: 21 }
+          - { name: shadowsocks, protocol: tcp, port_min: 8388, port_max: 8388 }
+      - name: ssh
+        rules:
+          - { name: ssh, protocol: tcp, port_min: 22, port_max: 22 }
+    network:
+      - name: internal
+        external: no
+        subnet:
+          - name: sub1
+            cidr: 172.20.66.0/24
+            dns:
+              - 4.4.4.4
+              - 8.8.8.8
+          - name: sub2
+            cidr: 172.20.88.0/24
+            dns:
+              - 4.4.4.4
+              - 8.8.8.8
+      - name: hide
+        external: no
+...

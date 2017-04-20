@@ -1,0 +1,12 @@
+---
+- name: Ensure APT Apache
+  apt:  name=apache2 state=latest
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure YUM Apache
+  yum:  name=httpd state=latest
+  when: ansible_os_family == 'RedHat'
+
+- name: Ensure Apache is runnung
+  service: name=httpd state=running  
+...

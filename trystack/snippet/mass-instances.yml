@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Trystack8 | Create OpenSuse VM with small Flavor
+    os_server:
+      cloud:  trystack2
+      name:   suse8-{{item}}
+      nics:
+        - net-name: hide
+      image:  openSUSE13.2
+      flavor: m1.small
+      key_name: wangkexiong
+      security_groups: default
+      auto_ip:  no
+    with_sequence: start=1 end=2
+...

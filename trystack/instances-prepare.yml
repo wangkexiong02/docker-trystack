@@ -1,0 +1,38 @@
+---
+- name: Prepare Roles from Galaxy
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+   - command: ansible-galaxy install -r requirements.yml --ignore-errors
+
+- name: Prepare Bastion for Nodes Accessing
+  hosts: ssh-bastion
+  remote_user: ubuntu
+  gather_facts: no
+
+  pre_tasks:
+    - name: Bastion | Install Python2
+      raw: sudo apt-get install -y python-simplejson
+
+  tasks:
+    - name: Bastion | Add Localhost Access
+      authorized_key: user=ubuntu key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+    - name: Bastion | Add Keys for Private Clients Accessing
+      copy:
+        src:   ./roles/infrastructure/files/ansible_id
+        dest:  /home/ubuntu/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode:  0400
+
+- name: Prepare Python for Ubuntu16.04
+  hosts: qualified
+  remote_user: ubuntu
+  gather_facts: no
+
+  pre_tasks:
+    - raw: sudo apt-get install -y python-simplejson
+...

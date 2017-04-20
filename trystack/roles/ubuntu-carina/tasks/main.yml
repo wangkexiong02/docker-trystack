@@ -1,0 +1,22 @@
+---
+- name: Ubuntu | Install docker
+  apt:  name=docker.io state=latest
+
+- name: Ubuntu | Install carina
+  raw:  curl -L https://download.getcarina.com/carina/latest/$(uname -s)/$(uname -m)/carina -o carina && chmod +x carina && sudo mv carina /usr/bin/.
+
+- name: Ubuntu | Add carina APIKEY
+  become: no
+  lineinfile:
+    dest: ~/.profile
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: 'export CARINA_USERNAME=', line: 'export CARINA_USERNAME={{ CARINA_USERNAME | default("") }}' }
+    - { regexp: 'export CARINA_APIKEY=', line: 'export CARINA_APIKEY={{ CARINA_APIKEY | default("") }}' }
+    - { regexp: 'export DOCKER_API_VERSION=', line: 'export DOCKER_API_VERSION={{ CARINA_APIVER | default("1.23") }}' }
+
+- name: Ubuntu | Upload Credentials
+  become: yes
+  copy: src=monitor.tar.xz dest=/var/log/monitor.tar.xz
+...

@@ -1,0 +1,19 @@
+---
+cache:
+  max_age: 3600
+
+clouds:
+  trystack1:
+    auth:
+      auth_url: "{{ lookup('env', 'TRYSTACK_AUTH_URL1') }}"
+      username: "{{ lookup('env', 'TRYSTACK_USER1') }}"
+      password: "{{ lookup('env', 'TRYSTACK_PWD1') }}"
+      project_name: "{{ lookup('env', 'TRYSTACK_USER1') }}"
+
+  trystack2:
+    auth:
+      auth_url: "{{ lookup('env', 'TRYSTACK_AUTH_URL2') }}"
+      username: "{{ lookup('env', 'TRYSTACK_USER2') }}"
+      password: "{{ lookup('env', 'TRYSTACK_PWD2') }}"
+      project_name: "{{ lookup('env', 'TRYSTACK_USER2') }}"
+...

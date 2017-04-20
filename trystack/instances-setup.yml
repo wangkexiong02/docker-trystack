@@ -1,0 +1,70 @@
+---
+- name: Add /etc/hosts for trystack1
+  hosts: beijing
+  remote_user: ubuntu
+  gather_facts: no
+  become: yes
+
+  roles:
+    - {
+        role: cloud-inventory,
+        group_hosts: "{{ trystack1 }}"
+      }
+
+- name: Add /etc/hosts for trystack2
+  hosts: trystack2
+  remote_user: ubuntu
+  gather_facts: no
+  become: yes
+
+  roles:
+    - {
+        role: cloud-inventory,
+        group_hosts: "{{ trystack2 }}"
+      }
+
+- name: Setup beijing
+  hosts: beijing
+  remote_user: ubuntu
+  gather_facts: no
+  become: yes
+  become_method: sudo
+
+  roles:
+    - {
+        role: ubuntu-ftpd,
+        anon_root: /home/ubuntu
+      }
+    - {
+        role: ubuntu-ddclient,
+        var_domain: open
+      }
+    - {
+        role: ubuntu-carina,
+        CARINA_USERNAME: kwang@lucent.com,
+        CARINA_APIKEY: cdac8917ce7446eba6abc218fb6ab7be
+      }
+    - ubuntu-bt
+    - {
+        role: ubuntu-vnc,
+        password4vnc: s3cr3t
+      }
+
+- name: Setup master1-k8s
+  hosts: master1-k8s
+  remote_user: ubuntu
+  gather_facts: no
+  become: yes
+  become_method: sudo
+
+  roles:
+    - {
+        role: ubuntu-ddclient,
+        var_domain: k8s
+      }
+    - {
+        role: ubuntu-carina,
+        CARINA_USERNAME: kwang@lucent.com,
+        CARINA_APIKEY: cdac8917ce7446eba6abc218fb6ab7be
+      }
+...
