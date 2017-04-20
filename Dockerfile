@@ -4,7 +4,9 @@ MAINTAINER wangkexiong<wangkexiong@gmail.com>
 COPY trystack /root/trystack
 COPY keystone_trystack* /root/
 COPY crontab /etc/crontabs/root
+COPY startup.sh /root/
 
-RUN apk add --no-cache wget && chmod +x /root/trystack/setup.sh
+RUN apk add --no-cache wget && chmod +x /root/trystack/setup.sh && chmod +x /root/startup.sh
+EXPOSE 80
 
-CMD ["crond", "-f", "-d", "8"]
+CMD ["/bin/sh", "-c", "/root/startup.sh"]
