@@ -1,2 +1,1 @@
-54  21 * * * /bin/sh -c "nova delete beijing hangzhou huhhot; exit"
 */15 * * * * /bin/sh -c "wget --no-passive-ftp -T 10 -t 2 -qO- ftp://open.dynu.com > /dev/null || (cd /root/trystack && ./setup.sh); exit"
