@@ -18,7 +18,7 @@ clouds:
       password: $TRYSTACK_USER2
       username: $TRYSTACK_PWD2
       project_name: $TRYSTACK_USER2
-..." > $PWD/trystack/cloud.yml
+..." > /root/trystack/cloud.yml
 
 python -m SimpleHTTPServer 80 &
 crond -f -d 8
