@@ -39,11 +39,7 @@
         role: ubuntu-ddclient,
         var_domain: open
       }
-    - {
-        role: ubuntu-carina,
-        CARINA_USERNAME: kwang@lucent.com,
-        CARINA_APIKEY: cdac8917ce7446eba6abc218fb6ab7be
-      }
+    - ubuntu-k8s
     - ubuntu-bt
     - {
         role: ubuntu-vnc,
@@ -62,9 +58,5 @@
         role: ubuntu-ddclient,
         var_domain: k8s
       }
-    - {
-        role: ubuntu-carina,
-        CARINA_USERNAME: kwang@lucent.com,
-        CARINA_APIKEY: cdac8917ce7446eba6abc218fb6ab7be
-      }
+    - ubuntu-k8s
 ...
