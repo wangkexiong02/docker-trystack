@@ -48,7 +48,7 @@
 
 - name: Setup master1-k8s
   hosts: master1-k8s
-  remote_user: ubuntu
+  remote_user: centos
   gather_facts: no
   become: yes
   become_method: sudo
