@@ -79,8 +79,8 @@
     flavor:   m1.small
     auto_ip:  yes
     meta:
-      ansible_host_groups: k8s_master, ssh-bastion, qualified
-      ansible_host_user:   ubuntu
+      ansible_host_groups: k8s_master, centos-bastion, centos-qualified
+      ansible_host_user:   centos
   tags: instance
 
 - name: Create k8s-workers
@@ -95,8 +95,8 @@
     flavor:   m1.small
     auto_ip:  no
     meta:
-      ansible_host_groups: k8s_worker, qualified
-      ansible_host_user:   ubuntu
+      ansible_host_groups: k8s_worker, centos-qualified
+      ansible_host_user:   centos
   with_sequence: count=2
   tags: instance
 ...

@@ -79,7 +79,7 @@
     flavor:   m1.small
     auto_ip:  yes
     meta:
-      ansible_host_groups: china, ssh-bastion, qualified
+      ansible_host_groups: china, ubuntu-bastion, ubuntu-qualified
       ansible_host_user:   ubuntu
   tags: instance
 

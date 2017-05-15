@@ -7,8 +7,8 @@
   tasks:
    - command: ansible-galaxy install -r requirements.yml --ignore-errors
 
-- name: Prepare Bastion for Nodes Accessing
-  hosts: ssh-bastion
+- name: Ubuntu | Prepare Bastion
+  hosts: ubuntu-bastion
   remote_user: ubuntu
   gather_facts: no
 
@@ -28,11 +28,20 @@
         group: ubuntu
         mode:  0400
 
-- name: Prepare Python for Ubuntu16.04
-  hosts: qualified
-  remote_user: ubuntu
+- name: CentOS | Prepare Bastion
+  hosts: centos-bastion
+  remote_user: centos
   gather_facts: no
 
-  pre_tasks:
-    - raw: sudo apt-get install -y python-simplejson
+  tasks:
+    - name: Bastion | Add Localhost Access
+      authorized_key: user=centos key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+    - name: Bastion | Add Keys for Private Clients Accessing
+      copy:
+        src:   ./roles/infrastructure/files/ansible_id
+        dest:  /home/centos/.ssh/id_rsa
+        owner: centos
+        group: centos
+        mode:  0400
 ...
