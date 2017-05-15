@@ -17,7 +17,10 @@
   with_items:
     - {name: ssh, protocol: tcp, port_min: 22, port_max: 22, remote: 0.0.0.0/0}
     - {name: flocker, protocol: tcp, port_min: 4523, port_max: 4523, remote: 0.0.0.0/0}
-    - {name: connect, protocol: tcp, port_min: 1000, port_max: 10000, remote: 10.0.33.0/24}
+    - {name: vnc, protocol: tcp, port_min: 5901, port_max: 5902, remote: 0.0.0.0/0}
+    - {name: vnc, protocol: tcp, port_min: 6001, port_max: 6002, remote: 0.0.0.0/0}
+    - {name: http, protocol: tcp, port_min: 80, port_max: 80, remote: 0.0.0.0/0}
+    - {name: sync, protocol: tcp, port_min: 8888, port_max: 8888, remote: 0.0.0.0/0}
   tags: security
 
 # 2. Provision Pub KeyPair
@@ -72,7 +75,7 @@
     security_groups: opsecurity
     nics:
       - net-name: internal
-    image:    Ubuntu16.04
+    image:    CentOS7
     flavor:   m1.small
     auto_ip:  yes
     meta:
@@ -88,7 +91,7 @@
     security_groups: opsecurity
     nics:
       - net-name: internal
-    image:    Ubuntu16.04
+    image:    CentOS7
     flavor:   m1.small
     auto_ip:  no
     meta:

@@ -42,6 +42,6 @@ export OS_USERNAME="$TRYSTACK_USER2"
 export OS_AUTH_STRATEGY=keystone
 " > /root/keystone_trystack2
 
-python -m SimpleHTTPServer 80 &
+cd /home && python -m SimpleHTTPServer 80 &
 crond -f -d 8
 
