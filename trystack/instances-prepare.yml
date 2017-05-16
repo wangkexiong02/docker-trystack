@@ -11,6 +11,8 @@
   hosts: image-CentOS7
   remote_user: centos
   gather_facts: no
+  become: yes
+  become_method: sudo
 
   tasks:
     - yum: name=epel-release state=latest
