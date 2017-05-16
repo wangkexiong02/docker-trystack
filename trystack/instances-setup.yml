@@ -45,4 +45,17 @@
         role: ubuntu-vnc,
         password4vnc: s3cr3t
       }
+
+- name: Setup master1-k8s
+  hosts: master1-k8s
+  remote_user: centos
+  gather_facts: yes
+  become: yes
+  become_method: sudo
+
+  roles:
+    - {
+        role: soft-ddclient,
+        var_domain: k8s
+      }
 ...

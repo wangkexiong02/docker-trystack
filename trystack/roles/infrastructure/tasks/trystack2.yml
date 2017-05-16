@@ -79,7 +79,7 @@
     flavor:   m1.small
     auto_ip:  yes
     meta:
-      ansible_host_groups: k8s_master, centos-bastion, centos-qualified
+      ansible_host_groups: k8s_master, centos-bastion
       ansible_host_user:   centos
   tags: instance
 
@@ -95,7 +95,7 @@
     flavor:   m1.small
     auto_ip:  no
     meta:
-      ansible_host_groups: k8s_worker, centos-qualified
+      ansible_host_groups: k8s_workers
       ansible_host_user:   centos
   with_sequence: count=2
   tags: instance

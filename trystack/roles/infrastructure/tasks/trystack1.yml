@@ -15,7 +15,8 @@
     port_range_max:   "{{item.port_max}}"
     remote_ip_prefix: "{{item.remote}}"
   with_items:
-    - {name: ftp, protocol: tcp, port_min: 21, port_max: 21, remote: 0.0.0.0/0}
+    - {name: ftp, protocol: tcp, port_min: 20, port_max: 21, remote: 0.0.0.0/0}
+    - {name: ftp-pasv, protocol: tcp, port_min: 30000, port_max: 30100, remote: 0.0.0.0/0}
     - {name: ssh, protocol: tcp, port_min: 22, port_max: 22, remote: 0.0.0.0/0}
     - {name: vnc, protocol: tcp, port_min: 5901, port_max: 5902, remote: 0.0.0.0/0}
     - {name: vnc, protocol: tcp, port_min: 6001, port_max: 6002, remote: 0.0.0.0/0}
@@ -79,7 +80,7 @@
     flavor:   m1.small
     auto_ip:  yes
     meta:
-      ansible_host_groups: china, ubuntu-bastion, ubuntu-qualified
+      ansible_host_groups: china, ubuntu-bastion
       ansible_host_user:   ubuntu
   tags: instance
 

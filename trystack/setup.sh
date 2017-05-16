@@ -1,13 +1,27 @@
 #! /bin/sh
 
 # Prevent duplicate CALLing
-if [ -f .WORKING_ON_TRYSTACK ]; then
-  return 100
+PREFIX=".WORKING_ON_TRYSTACK_"
+if [ -f $PREFIX* ]; then
+  for i in `ls -1 $PREFIX*`
+  do
+    CREATED=`stat -c%Z $i`
+    CURRENT=`date +"%s"`
+
+    if [[ $(($CURRENT-$CREATED)) -gt $((3600*2)) ]]; then
+      pkill -TERM -P ${i:${#PREFIX}}
+      rm -rf $i
+    else
+      return 100
+    fi
+  done
 fi
-touch .WORKING_ON_TRYSTACK
+
+FLAG="$PREFIX$$"
+touch $FLAG
 
 # Repeat if SSH connection fail
-REPEAT=3
+REPEAT=${SS_REPEAT:-3}
 
 # Redirect stdio to LOGFILE
 if [ "$LOGPATH" != "" ]; then
@@ -91,6 +105,6 @@ else
 fi
 
 # Release for next CALLing
-rm -rf .WORKING_ON_TRYSTACK
+rm -rf $FLAG
 
 exec 1>&2

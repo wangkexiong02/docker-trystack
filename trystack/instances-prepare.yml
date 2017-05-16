@@ -7,6 +7,14 @@
   tasks:
    - command: ansible-galaxy install -r requirements.yml --ignore-errors
 
+- name: CentOS | Enable EPEL repo
+  hosts: image-CentOS7
+  remote_user: centos
+  gather_facts: no
+
+  tasks:
+    - yum: name=epel-release state=latest
+
 - name: Ubuntu | Prepare Bastion
   hosts: ubuntu-bastion
   remote_user: ubuntu
