@@ -1,16 +1,4 @@
 ---
-- name: Add /etc/hosts for trystack1
-  hosts: beijing
-  remote_user: ubuntu
-  gather_facts: no
-  become: yes
-
-  roles:
-    - {
-        role: cloud-inventory,
-        group_hosts: "{{ trystack1 }}"
-      }
-
 - name: Add /etc/hosts for trystack2
   hosts: trystack2
   remote_user: centos
@@ -26,14 +14,29 @@
 - name: Setup beijing
   hosts: beijing
   remote_user: ubuntu
-  gather_facts: no
+  gather_facts: yes
   become: yes
   become_method: sudo
 
   roles:
     - {
-        role: ubuntu-ftpd,
-        anon_root: /home/ubuntu
+        role: cloud-inventory,
+        group_hosts: "{{ trystack1 }}"
+      }
+    - {
+        role: soft-vsftpd,
+        vsftpd_config:
+          listen: YES
+          listen_ipv6: NO
+          anonymous_enable: YES
+          local_enable: NO
+          write_enable: NO
+          anon_root: /home/ubuntu/Downloads
+          pasv_enable: Yes
+          pasv_min_port: 30000
+          pasv_max_port: 30100
+          pasv_addr_resolvei: YES
+          pasv_address: open.dynu.com
       }
     - {
         role: ubuntu-ddclient,
