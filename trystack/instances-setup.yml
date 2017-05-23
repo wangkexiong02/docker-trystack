@@ -25,22 +25,33 @@
       }
     - {
         role: soft-vsftpd,
-        vsftpd_config:
-          listen: YES
-          listen_ipv6: NO
-          anonymous_enable: YES
-          local_enable: NO
-          write_enable: NO
-          anon_root: /home/ubuntu/Downloads
-          pasv_enable: Yes
-          pasv_min_port: 30000
-          pasv_max_port: 30100
-          pasv_addr_resolvei: YES
-          pasv_address: open.dynu.com
+        vsftpd_config: {
+          listen: "YES",
+          listen_ipv6: "NO",
+          anonymous_enable: "YES",
+          local_enable: "YES",
+          write_enable: "NO",
+          anon_root: /home/ubuntu/Downloads,
+          pasv_enable: "YES",
+          pasv_min_port: 30000,
+          pasv_max_port: 30100,
+          pasv_addr_resolve: "YES",
+          pasv_address: beijing.dynu.net
+        },
+        vsftpd_users: [
+          {
+            username: vsftp,
+            password: '$1$somesalt$jezmI5TSY7mVTzHLgsK5L.'
+          },
+          {
+            username: wangkexiong,
+            password: '$1$somesalt$jezmI5TSY7mVTzHLgsK5L.'
+          }
+        ]
       }
     - {
-        role: ubuntu-ddclient,
-        var_domain: open
+        role: soft-ddclient,
+        var_domain: beijing
       }
     - ubuntu-k8s
     - ubuntu-bt

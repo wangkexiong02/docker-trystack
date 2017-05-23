@@ -1,22 +1,13 @@
 ---
-- name: Install ddclient on Ubuntu
-  become: yes
-  apt:  name=ddclient state=latest
-  when: ansible_os_family == 'Debian'
+- name: ddclient | Installing packages
+  action: "{{ ansible_pkg_mgr }} pkg=ddclient state=present"
 
-- name: Install ddclient on CentOS
-  become: yes
-  yum:  name=ddclient state=latest
-  when: ansible_os_family == 'RedHat'
-
-- name: Ensure ddclient is runnung
-  service: name=ddclient state=running
-
-- name: Configure ddclient
-  become: yes
+- name: ddclient | Setup configuration
   template: src=ddclient.conf.j2 dest=/etc/ddclient.conf
 
 - name: Set ddclient running as daemon
-  become: yes
   copy: src=ddclient dest=/etc/default/ddclient
+
+- name: Ensure ddclient is runnung
+  service: name=ddclient state=running
 ...

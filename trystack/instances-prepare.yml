@@ -14,7 +14,7 @@
 
   pre_tasks:
     - name: Ubuntu | Install Python2
-      raw: sudo apt-get install -y python-simplejson
+      raw: sudo apt install -y python-simplejson
 
   tasks:
     - name: Bastion | Add Localhost Access
@@ -46,14 +46,12 @@
         mode:  0400
 
 - name: Ubuntu | Enable Python2
-  hosts: image-Ubuntu
+  hosts: image-Ubuntu16.04
   remote_user: ubuntu
   gather_facts: no
-  become: yes
-  become_method: sudo
 
   tasks:
-    - raw: sudo apt-get install -y python-simplejson
+    - raw: sudo apt install -y python-simplejson
 
 - name: CentOS | Enable EPEL repo
   hosts: image-CentOS7

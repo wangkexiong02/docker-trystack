@@ -75,7 +75,7 @@ then
   #
   for i in `seq $REPEAT`
   do
-    ansible-playbook -i scripts/openstack.py instances-prepare.yml --private-key=roles/infrastructure/files/ansible_id
+    ansible-playbook -i scripts/openstack.py instances-prepare.yml --private-key=roles/infrastructure/files/ansible_id -T 60
     if [ -f instances-prepare.retry ]
     then
       rm -rf instances-prepare.retry
