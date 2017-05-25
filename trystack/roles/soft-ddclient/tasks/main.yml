@@ -4,10 +4,6 @@
 
 - name: ddclient | Setup configuration
   template: src=ddclient.conf.j2 dest=/etc/ddclient.conf
-
-- name: Set ddclient running as daemon
-  copy: src=ddclient dest=/etc/default/ddclient
-
-- name: Ensure ddclient is runnung
-  service: name=ddclient state=running
+  notify:
+    - restart ddclient
 ...

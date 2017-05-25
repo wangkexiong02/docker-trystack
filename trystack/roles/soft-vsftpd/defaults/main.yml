@@ -26,3 +26,4 @@ vsftpd_seboolean: {}
 vsftpd_service_enabled: yes
 # current state: started, stopped
 vsftpd_service_state: started
+...

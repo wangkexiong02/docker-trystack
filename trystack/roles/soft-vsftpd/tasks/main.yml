@@ -5,16 +5,6 @@
 - name: vsftpd | Installing packages
   action: "{{ ansible_pkg_mgr }} pkg=vsftpd state=present"
 
-- name: vsftpd | Setting up Configuration
-  lineinfile:
-    dest: "{{ vsftpd_config_path }}"
-    regexp: "{{ item.key }}="
-    line: "{{ item.key }}={{ item.value }}"
-  with_dict:
-    "{{ vsftpd_config }}"
-  notify:
-    - restart vsftpd
-
 - name: System | Adding nologin shell
   lineinfile:
     state: present
@@ -37,6 +27,16 @@
     password: "{{ item.password }}"
     shell:    /usr/sbin/nologin
   with_items: "{{ vsftpd_users }}"
+
+- name: vsftpd | Setting up Configuration
+  lineinfile:
+    dest: "{{ vsftpd_config_path }}"
+    regexp: "{{ item.key }}="
+    line: "{{ item.key }}={{ item.value }}"
+  with_dict:
+    "{{ vsftpd_config }}"
+  notify:
+    - restart vsftpd
 
 - name: vsftpd | Configuring service
   service:
