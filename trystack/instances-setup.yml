@@ -29,8 +29,8 @@
         ddclient_use:      "web, web=checkip.dynu.com",
         ddclient_server:   "api.dynu.com",
         ddclient_login:    "{{ lookup('env', 'DYNU_LOGIN') }}",
-        ddclient_password: "{{ lookup('env', 'DYNU_PWD' }}",
-        ddclient_domain:   "{{ lookup('env', 'BEIJING_DOMAIN' }}"
+        ddclient_password: "{{ lookup('env', 'DYNU_PWD') }}",
+        ddclient_domain:   "{{ lookup('env', 'BEIJING_DOMAIN') }}"
       }
     - ubuntu-k8s
     - ubuntu-bt
@@ -51,7 +51,7 @@
           pasv_min_port: 30000,
           pasv_max_port: 30100,
           pasv_addr_resolve: "YES",
-          pasv_address: "{{ lookup('env', 'BEIJING_DOMAIN' }}"
+          pasv_address: "{{ lookup('env', 'BEIJING_DOMAIN') }}"
         },
         vsftpd_users: [
           {
@@ -79,8 +79,8 @@
     ddclient_protocol: "dyndns2"
     ddclient_server:   "api.dynu.com"
     ddclient_login:    "{{ lookup('env', 'DYNU_LOGIN') }}"
-    ddclient_password: "{{ lookup('env', 'DYNU_PWD' }}"
-    ddclient_domain:   "{{ lookup('env', 'K8S_DOMAIN' }}"
+    ddclient_password: "{{ lookup('env', 'DYNU_PWD') }}"
+    ddclient_domain:   "{{ lookup('env', 'K8S_DOMAIN') }}"
     vsftpd_users:
       - username: vsftp
         name:     FTP User
@@ -98,7 +98,7 @@
       pasv_min_port:     30000
       pasv_max_port:     30100
       pasv_addr_resolve: YES
-      pasv_address:      "{{ lookup('env', 'K8S_DOMAIN' }}"
+      pasv_address:      "{{ lookup('env', 'K8S_DOMAIN') }}"
       log_ftp_protocol:  YES
       xferlog_enable:    YES
 ...
