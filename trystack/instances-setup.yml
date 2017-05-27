@@ -35,9 +35,6 @@
       rslsync_webui:
         user:     "{{ lookup('env', 'SYNC_GUIUSER') }}"
         password: "{{ lookup('env', 'SYNC_GUIPWD') }}"
-      rslsync_shared_folders:
-        - path: /home/ubuntu/Downloads
-          key:  B7LCUGCJ4XWG6XQ747PM5PYXPEYPZVUP6
     - {
         role: soft-vsftpd,
         vsftpd_config: {

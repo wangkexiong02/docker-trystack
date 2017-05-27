@@ -11,7 +11,7 @@
      {% if rslsync_webui.get('api_key') -%}
      "api_key"  : "{{ rslsync_webui.api_key }}",
      {% endif -%}
-     "listen": "{{ rslsync_webui.listen }}:8888",
+     "listen": "0.0.0.0:8888",
      "login" : "{{ rslsync_webui.user }}",
      "password" : "{{ rslsync_webui.password }}"
   },
