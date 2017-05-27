@@ -12,18 +12,14 @@
 #    ftpd_full_access: no
 #
 
-# define package (version)
 vsftpd_package: vsftpd
-# users to create with nologin
+
 vsftpd_users: []
-# user group to create with nologin
 vsftpd_group: ftp
-# config variables
+
 vsftpd_config: {}
-# optional SELinux booleans to be set i.e. for RedHat
 vsftpd_seboolean: {}
-# start on boot
+
 vsftpd_service_enabled: yes
-# current state: started, stopped
 vsftpd_service_state: started
 ...

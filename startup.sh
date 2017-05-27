@@ -56,6 +56,10 @@ cat >> /root/trystack/clouds.yml << EOF
 ...
 EOF
 
+cat > /home/index.html << EOF
+<h1>Jail Here...</h1>
+EOF
+
 cd /home && python -m SimpleHTTPServer 80 &
 crond -f -d 8
 

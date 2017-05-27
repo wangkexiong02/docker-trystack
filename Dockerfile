@@ -1,6 +1,8 @@
 FROM wangkexiong/openstackcli
 MAINTAINER wangkexiong<wangkexiong@gmail.com>
 
+ENV TZ "Asia/Shanghai"
+
 COPY trystack /root/trystack
 COPY crontab /etc/crontabs/root
 COPY startup.sh /root/
